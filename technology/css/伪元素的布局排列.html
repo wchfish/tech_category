@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>伪元素布局</title>
+	<style type="text/css">
+		.ct {
+			margin:0 auto;
+			margin-top: 100px;
+			width: 900px;
+			height: 100px;
+			/*line-height: 40px;*/
+			text-align: center;
+			background: #00a0e9;
+			color: #fff;
+			font-size: 36px;
+		}
+		.ct1 {
+			margin-top: 20px;
+		}
+		.line {
+			display: inline-block;
+		    width: 100%;
+		    margin-right: -100%;
+		    position: relative;
+		    z-index: 10;
+		    border-top: 1px solid #000;
+		}
+		.line.baseline {
+			vertical-align: baseline;
+			border: 1px solid #0f0;
+		}
+		.line.top {
+			vertical-align: top;
+			border: 1px solid #f00;
+		}
+		.line.bottom {
+			vertical-align: bottom;
+			border: 1px solid #f00;
+		}
+		.line.text-top {
+			vertical-align: text-top;
+			border: 1px solid #ff0;
+		}
+		.line.text-bottom {
+			vertical-align: text-bottom;
+			border: 1px solid #ff0;
+		}
+		.pseudo {
+			/*height: 20px;*/
+			/*vertical-align: middle;*/
+			background-color: #0f0;
+		}
+		/*.pseudo::before {
+			content: "+";
+		}*/
+		.base {
+			background-color: #f00;
+		}
+		.textbox {
+			background: gray;
+		}
+		.normal {
+			font-size: 16px;
+			background: red;
+			vertical-align: middle;
+		}
+		.largeFont {
+			font-size: 18px;
+			/*vertical-align: middle;*/
+		}
+
+		.anotherline {
+			background-color: #f00;
+		}
+		.ib {
+			display: inline-block;
+			background: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<!-- <div class="ct">
+		<span class="base">x</span>
+		<span class="pseudo">middle</span><br/>
+		<span class="anotherline">anotherline</span>
+		<span class="largeFont">大字体</span>
+	</div> -->	 
+	<div class="ct ct1">
+		<span class="line baseline"></span>
+		<span class="line top"></span>
+		<span class="line text-top"></span>
+		<span class="line bottom"></span>
+		<span class="line text-bottom"></span>
+		<span class="textbox">abcdefghijklmnopqrstuvwxyz</span>
+		<span class="normal">xnormal</span>	
+	</div>
+	<div class="ct ct1">
+		<span class="line top"></span>
+		<span class="line bottom"></span>
+		<span class="textbox">gx</span>
+		<span class="ib">inline-block</span>
+	</div>
+</body>
+</html>

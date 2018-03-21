@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assign_merge</title>
+    <script src="../lodash.js"></script>
+</head>
+<body>
+
+<script>
+    var target = {
+        a: {
+            id: 'star'
+        },
+        c: 'hoho',
+        d: [
+            {
+                x: '20',
+                y: '30'
+            },
+            2
+        ]
+    };
+//    var src = {
+//        a: {
+//            name: 'luck'
+//        },
+//        b: 'enen',
+//        d: [
+//            {
+//                x: '30'
+//            }
+//        ]
+//    };
+    var srcPrototype = {
+        type: 'prototype',
+        name: 'prototype obj'
+    };
+    var src = _.create(srcPrototype, {
+        a: {
+            name: 'luck'
+        },
+        b: 'enen',
+        d: [
+            {
+                x: '30'
+            }
+        ]
+    });
+    var result1 = _.assign({}, target, src);
+    var result2 = _.merge({}, target, src);
+    debugger
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>包装jquery插件</title>
+    <link rel="stylesheet" href="select2.min.css">
+
+    <script src="../../../libs/jquery/jquery-2.2.4.js"></script>
+    <script src="select2.js"></script>
+    <script src="../lib/vue.js"></script>
+
+    <style>
+        html, body {
+            font: 13px/18px sans-serif;
+        }
+        select {
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="el"></div>
+
+<!-- using string template here to work around HTML <option> placement restriction -->
+<script type="text/x-template" id="demo-template">
+    <div>
+        <p>Selected: {{ selected }}</p>
+        <select2 :options="options" v-model="selected" @input="log">
+            <option disabled value="0">Select one</option>
+        </select2>
+    </div>
+</script>
+
+<script type="text/x-template" id="select2-template">
+    <select>
+        <slot></slot>
+    </select>
+</script>
+
+<script src="wrapper.js"></script>
+</body>
+</html>

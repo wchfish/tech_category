@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域</title>
+    <script src="../../moment/moment.js"></script>
+    <script src="../baiduTemplate.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script id="template-test" type="text/template">
+        <div id="content1">时间对象： <%=m.date()%> （表达式求值）</div>
+        <div id="content2">全局：<%=g_str%> （获取全局变量）</div>
+        <%var tempValue = '模板临时变量'%>
+        <div id="content3"><%=tempValue%></div>
+        <!--不能传入多个数据，只能把不同的数据封装在一起最为参数传入-->
+        <!--<div id="content3">多个数据： <%=xx_myData%></div>-->
+
+    </script>
+
+    <script type="text/javascript">
+        var g_str = '全局字符串';
+        var m = moment();
+        var data = {
+            m: m
+        };
+        var data2 = {
+            xx_myData: '另一个数据'
+        };
+
+        var tplStr = baidu.template('template-test', data, data2);
+        document.getElementById('container').innerHTML = tplStr;
+
+    </script>
+</body>
+</html>

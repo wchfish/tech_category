@@ -1,0 +1,27 @@
+{
+  "description": "在表单中设置的echarts配置项",
+  "option": {
+    "properties": {
+      "title": {
+        "show": true,
+        "text": true,
+        "subtext": true
+      },
+      "legend": {
+        "show": true
+      },
+      "dataZoom": {
+        "type": true,
+        "start": true,
+        "end": true,
+        "xAxisIndex": true,
+        "yAxisIndex": true
+      },
+      "series": {
+        "name": true,
+        "smooth": true,
+        "symbol": true
+      }
+    }
+  }
+}

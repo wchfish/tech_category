@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片裁剪</title>
+</head>
+<body>
+    <input id="imgUpload" type="file" accept="image"></input>
+    <img id="previewImg" src="" alt="">
+
+    <script>
+        var input = document.getElementById('imgUpload');
+        var img = document.getElementById('previewImg');
+        input.onchange = function() {
+            img.src = input.value;
+        }
+    </script>
+</body>
+</html>

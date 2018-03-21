@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父页面</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #f00;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h3>这是父页面</h3>
+    <div class="container">
+        <button id="btn">增加iframe</button>
+        <iframe id="iframe1" src="child1.html" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // 点击页面内的按钮时，增加一个iframe嵌套的子页面
+        function addIframe() {
+            var ele_iframe = document.createElement('iframe');
+            ele_iframe.src = 'child2.html';
+            ele_iframe.id = 'child2';
+            var ele_container = document.getElementsByClassName('container')[0];
+            ele_container.appendChild(ele_iframe);
+        }
+
+        var ele_btn = document.getElementById('btn');
+        var iframes = [];
+
+        ele_btn.addEventListener('click', function() {
+            addIframe();
+            iframes = getIframeWindows(window);
+        });
+
+        /*************************************************
+         * 实验性功能代码
+         * ************************************************/
+        // 获取当前页面下的所有iframeWindow，包括嵌套的iframes
+        function getIframeWindows(currentWindow) {
+            var iframes = [];
+            var ele_iframes = currentWindow.document.getElementsByTagName('iframe');
+            if (ele_iframes.length <= 0) {
+                return iframes;
+            } else {
+                for (var i = 0, len = ele_iframes.length; i < len; i++) {
+                    iframes[i] = ele_iframes[i].contentWindow;
+                    iframes = iframes.concat(getIframeWindows(ele_iframes[i].contentWindow));
+                }
+            }
+            return iframes;
+        }
+
+        window.getIframeWindows = getIframeWindows;
+
+
+        // 监听当前页面及子页面的点击事件，关闭导航菜单弹出的子菜单
+        // 目前这部分程序已经完美达到不可维护的状态了，连我都搞不清楚代码为什么有效
+        function handleIframeClick(currentWindow) {
+            currentWindow.addEventListener('DOMContentLoaded', function (e) {
+                // 非顶层页面监听页面自身的点击事件
+                if (currentWindow.parent !== currentWindow) {
+
+                    currentWindow.addEventListener('click', function(e) {
+                        navMenu.unSelectPrimaryItem();
+                    }, true);
+                    console.log('iframeWindow has bind click event!');
+
+                    // 监听iframe的重载事件,此时iframe嵌入的window被重新创建
+                    var ele_frame = currentWindow.frameElement;
+                    ele_frame.addEventListener('load', function() {
+                        ele_frame.contentWindow.addEventListener('click', function(e) {
+                            navMenu.unSelectPrimaryItem();
+                        }, true);
+                        console.log('bind load event');
+                    });
+                }
+
+                // 监听当前存在的子iframe的点击事件
+                var iframeWindows = getIframeWindows(currentWindow);
+                for (var i = 0, len = iframeWindows.length; i < len; i++) {
+                    handleIframeClick(iframeWindows[i]);
+                }
+                console.log('currentWindow has' + iframeWindows.length + 'child iframe!');
+
+                // 监听页面中新增的子iframe点击事件
+                currentWindow.addEventListener('DOMNodeInserted', function(e) {
+                    if (e.target.nodeName === 'IFRAME') {
+                        var targetWindow = e.target.contentWindow;
+                        handleIframeClick(targetWindow);
+                    }
+                });
+            });
+            console.log('window has bind DOMContentLoaded!');
+        }
+
+        handleIframeClick(window);
+
+        /*************************************************
+         * 实验性功能代码 end
+         * ************************************************/
+    </script>
+</body>
+</html>

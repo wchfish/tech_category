@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; color: #333; font-family: "Microsoft Yahei"; font-size: 14px; }
+
+    #lightbox_mask {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .7);
+    }
+    #lightbox_popup {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #lightbox_popup .pic-view {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      text-align: center;
+    }
+    #lightbox_popup .pic-view .pic {
+      max-width: 100%;
+      max-height: 100%;
+      border: 5px solid #fff;
+      border-radius: 3px;
+    }
+    #lightbox_popup .btn-view {}
+    #lightbox_popup .btn-view .btn {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 24px;
+      text-decoration: none;
+      border-radius: 32px;
+      background-color: #000;
+      opacity: .4;
+      color: #fff;
+
+      transition: all .3s;
+    }
+    #lightbox_popup .btn-view .btn:hover {
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    #lightbox_popup .btn-view .btn-prev {
+      left: 10px;
+      top: 48%;
+    }
+    #lightbox_popup .btn-view .btn-next {
+      right: 10px;
+      top: 48%;
+    }
+    #lightbox_popup .btn-view .btn-close {
+      right: 10px;
+      top: 10px;
+    }
+    #lightbox_popup .caption-view {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 38px;
+      background-color: rgba(0, 0, 0, .7);
+      text-align: center;
+    }
+    #lightbox_popup .caption-view p {
+      line-height: 38px;
+      color: #fff;
+    }
+
+    .lightbox-pic {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>第一组图片: 能左右切换</h1>
+  <!--<div id="lightbox_1">
+    <img src="images/1-1.png" alt="#" class="lightbox-pic"
+      data-role="lightbox"
+      data-source="images/1-1.png"
+      data-group="group-1"
+      data-id="pic_1_1"
+      data-caption="pic_1_1">
+    <img src="images/1-2.png" alt="#" class="lightbox-pic" data-role="lightbox" data-source="images/1-2.png" data-group="group-1" data-id="pic_1_2" data-caption="pic_1_2">
+    <img src="images/1-3.png" alt="#" class="lightbox-pic" data-role="lightbox" data-source="images/1-3.png" data-group="group-1" data-id="pic_1_3" data-caption="pic_1_3">
+    <img src="images/1-4.png" alt="#" class="lightbox-pic" data-role="lightbox" data-source="images/1-4.png" data-group="group-1" data-id="pic_1_4" data-caption="pic_1_4">
+  </div>-->
+  <h1>第二组图片：不能左右切换</h1>
+  <div id="lightbox_2">
+    <img src="images/2-1.png" alt="#" class="lightbox-pic" data-role="lightbox" data-source="images/2-1.png" data-group="group-2" data-id="pic_2_1" data-caption="pic_2_1">
+    <!--<img src="images/2-2.png" alt="#" class="lightbox-pic" data-role="lightbox" data-source="images/2-2.png" data-group="group-2" data-id="pic_2_2" data-caption="pic_2_2">
+    <img src="images/2-3.png" alt="#" class="lightbox-pic" data-role="lightbox" data-source="images/2-3.png" data-group="group-2" data-id="pic_2_3" data-caption="pic_2_3">-->
+  </div>
+
+  <div id="lightbox_mask"></div>
+  <div id="lightbox_popup">
+    <div class="pic-view">
+      <img src="" alt="#" class="pic">
+    </div>
+    <div class="btn-view">
+      <a href="#" class="btn btn-prev">←</a>
+      <a href="#" class="btn btn-next">→</a>
+      <a href="#" class="btn btn-close">×</a>
+    </div>
+    <div class="caption-view">
+      <p></p>
+    </div>
+  </div>
+
+  <script src="jquery.min.js"></script>
+  <script src="lightbox.js"></script>
+  <script>
+    $(function () {
+
+      $('#lightbox_1').lightbox({
+        ifChange: true
+      });
+
+      $('#lightbox_2').lightbox();
+
+    });
+  </script>
+
+</body>
+</html>

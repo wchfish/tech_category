@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise基础使用</title>
+</head>
+<body>
+    <div id="content"></div>
+
+<script>
+//    var mp = new Promise(function(resolve, reject) {
+//        setTimeout(function() {
+//            resolve('成功了');
+//            console.log('成功了');
+//        }, 250);
+//    });
+
+//    mp.then(function(message) {
+//        document.getElementById('content').innerHTML = message;
+//    });
+function myAsyncFunction(url) {
+    return new Promise((resolve, reject) => {
+//        const xhr = new XMLHttpRequest();
+//        xhr.open("GET", url);
+//        xhr.onload = () => resolve(xhr.responseText);
+//        xhr.onerror = () => reject(xhr.statusText);
+//        xhr.send();
+        setTimeout(function() {
+            resolve('成功了');
+            console.log('成功了');
+        }, 250);
+    });
+};
+
+var mp = myAsyncFunction();
+mp.then(function(message) {
+    document.getElementById('content').innerHTML = message;
+});
+</script>
+</body>
+</html>

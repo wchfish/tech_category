@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>base</title>
+    <script src="../lodash.js"></script>
+</head>
+<body>
+
+<script>
+    obj = {
+        'echarts-toolbox-show': true,
+        'isNew': false
+    };
+
+    var result = {};
+
+    _.chain(obj)
+        .forOwn(function(value, key) {
+            if (key.search('echarts') === 0) {
+                result[key] = value;
+            }
+        })
+        .value();
+</script>
+</body>
+</html>

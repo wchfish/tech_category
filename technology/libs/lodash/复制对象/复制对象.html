@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象赋值</title>
+    <script src="../lodash.js"></script>
+</head>
+<body>
+
+    <script>
+        // deep clone
+        _.cloneDeep();
+
+        var echartsOption = {
+            title: {
+                text: '主标题',
+                subtext: '副标题'
+            },
+            data: [1, 2]
+        };
+
+
+//        var obj = {};
+//        var arr = [];
+        var getOption = function(option, obj, keyArr) {
+            if (!keyArr) {
+                var keyArr = []
+            }
+            if (!obj) {
+                var obj = {}
+            }
+            _.forEach(option, function(value, key) {
+                keyArr.push(key);
+                if (!_.isObject(value)) {
+                    var fullKey = keyArr.join('-');
+                    obj[fullKey] = value;
+                    keyArr.pop();
+                } else if (_.isArray(value)) {
+                    var fullKey = keyArr.join('-');
+                    obj[fullKey] = JSON.stringify(value);
+                    keyArr.pop();
+                } else {
+                    getOption(value, obj, keyArr);
+                    keyArr.pop();
+                }
+            });
+
+            return obj;
+        }
+
+        var result = getOption(echartsOption);
+        debugger
+
+    </script>
+</body>
+</html>

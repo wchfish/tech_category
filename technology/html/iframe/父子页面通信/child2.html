@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>child2</title>
+    <style>
+        .page {
+            border: 1px solid #00bbee;
+        }
+        .header {
+            height: 50px;
+        }
+        .body {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">子页面2</div>
+    </div>
+    <div class="container_btn">
+        <button id="childBtn">增加iframe</button>
+    </div>
+    <div class="body">
+        <div class="content">点击子页面通知父页面</div>
+    </div>
+    <div class="container"></div>
+
+    <!--<iframe id="child2_iframe2" src="child_iframe/child2_iframe2.html" frameborder="0"></iframe>-->
+    <script>
+        var ele_title = document.getElementsByClassName('title')[0];
+        ele_title.onclick = function(e) {
+            e.stopPropagation();
+        }
+
+        function addIframe() {
+            var ele_iframe = document.createElement('iframe');
+            ele_iframe.src = 'child_iframe/child2_iframe2.html';
+            ele_iframe.id = 'child2_iframe2';
+            var ele_container = document.getElementsByClassName('container')[0];
+            ele_container.appendChild(ele_iframe);
+        }
+
+
+        var ele_childBtn = document.getElementById('childBtn');
+        ele_childBtn.addEventListener('click', function() {
+            addIframe();
+        });
+        // 监听DOM元素插入，对于iframe嵌入的页面增加点击事件的处理函数，在点击时打印信息
+        window.addEventListener('DOMNodeInserted', function(e){
+            if (e.target.nodeName === 'IFRAME') {
+                e.target.contentWindow.addEventListener('click', function(e) {
+                    // 关闭主页菜单的弹出框
+                    console.log('close popMenu');
+                }, true);
+            }
+        });
+    </script>
+</body>
+</html>

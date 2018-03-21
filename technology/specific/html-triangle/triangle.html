@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>triangle</title>
+    <style>
+        .panel {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: #00a0e9;
+        }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-top: 20px solid #f00;
+            border-right: 20px solid #ff0;
+        }
+        .triangle--rb {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <p>利用border的颜色不同，形成三角形</p>
+    <div class="panel">
+        <div class="triangle triangle--rb"></div>
+    </div>
+</body>
+</html>

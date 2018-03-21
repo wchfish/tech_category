@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mix</title>
+</head>
+<body>
+<script>
+    formValues = {
+        'dataZoom-start': 25,
+        'toolbox-feature-restore': 'T'
+    };
+    var customOption = {};
+    // 生成表单值对应的配置项
+    for (var key in formValues) {
+        if (formValues.hasOwnProperty(key)) {
+            var fields = key.split('-');
+            fields.reduce(function(option, field, index, fields) {
+                if (index === fields.length - 1) {
+                    option[field] = formValues[key];
+                } else {
+                    option[field] = option[field] || {};
+                }
+                return option[field];
+            }, customOption);
+        }
+    }
+
+    // 配置项键值校验
+    for (var key in customOption) {
+        if (customOption.hasOwnProperty(key)) {
+            console.log(key);
+        }
+    }
+
+    debugger
+    console.log('end');
+</script>
+</body>
+</html>
