@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动端touch事件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+        .main {
+            width: 100%;
+            height: 100%;
+        }
+        .element {
+            width: 200px;
+            height: 200px;
+            border: #00ee00;
+            background-color: #1483d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="element"></div>
+    </div>
+
+    <script>
+        var ele = document.getElementsByClassName('element')[0];
+        ele.addEventListener('touchstart', function(e) {
+            console.log('touch start event!');
+        });
+
+        ele.addEventListener('touchend', function(e) {
+            console.log('touch end event!');
+        });
+
+        var count = 0;
+        var myTouchList = [];
+        ele.addEventListener('touchmove', function(e) {
+            myTouchList.push(e.changedTouches);
+        });
+
+        // 创建touch事件对象
+        var touchstartInstance = new TouchEvent('touchstart');
+        ele.dispatchEvent(touchstartInstance);
+
+        var touchendInstance = new TouchEvent('touchend');
+        ele.dispatchEvent(touchendInstance);
+
+        // 模拟touchmove事件
+        var touchInstance = new Touch();
+        var touchmoveInstance = new TouchEvent('touchmove', {})
+    </script>
+</body>
+</html>

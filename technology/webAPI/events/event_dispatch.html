@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js触发事件</title>
+    <style>
+        .block {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #7aba7b;
+        }
+    </style>
+
+    <script src="../../libs/jquery/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div class="block">
+        <div class="info">测试区域元素</div>
+    </div>
+
+    <script>
+        var block = document.getElementsByClassName('block')[0];
+        block.addEventListener('mousedown', function(e) {
+            console.log('handle mousedown!');
+        });
+        block.addEventListener('click', function(e) {
+            console.log('handle click!');
+        });
+
+        var event = new Event('mousedown');
+        block.dispatchEvent(event);
+    </script>
+</body>
+</html>
